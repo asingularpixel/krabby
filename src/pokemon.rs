@@ -191,11 +191,7 @@ impl PokemonDatabase {
             ));
         }
 
-        let shiny = if name.random_shiny {
-            rand::thread_rng().gen_bool(self.config.shiny_rate) || name.common.shiny
-        } else {
-            name.common.shiny
-        };
+        let shiny = (name.random_shiny && rand::thread_rng().gen_bool(self.config.shiny_rate)) || name.common.shiny;
 
         let art_path = pokemon.get_art_path(&name.form, shiny)?;
 
